@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>DynamicWrapper</id>
-    <version>1.0.0</version>
+    <version>$version$</version>
     <authors>Ritch Melton, Brian Genesio</authors>
     <owners>Ritch Melton, Brian Genesio</owners>
     <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
