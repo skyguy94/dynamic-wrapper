@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Package</id>
+    <id>DynamicWrapper</id>
     <version>1.0.0</version>
     <authors>Ritch Melton, Brian Genesio</authors>
     <owners>Ritch Melton, Brian Genesio</owners>
