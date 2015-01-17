@@ -48,4 +48,4 @@ The important thing to know is that this is a wrapped object. Unlike casting, th
 ClassWithoutInterface realObject = actor.AsReal<ClassWithoutInterface>(); 
 ```
 
-That is all there is too this utility. Stop writing wrapper classes, and do something more productive with your time.
+That is all there is to this utility. Stop writing wrapper classes and do something more productive with your time.
