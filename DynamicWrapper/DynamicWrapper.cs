@@ -40,20 +40,18 @@ namespace DynamicWrapper
     {
       var wrapperName = string.Format("{0}_{1}_Wrapper", interfaceType.Name, realObjectType.Name);
 
-      TypeBuilder wrapperBuilder = ModuleBuilder.DefineType(
+      var typeBuilder = ModuleBuilder.DefineType(
         wrapperName,
         TypeAttributes.NotPublic | TypeAttributes.Sealed,
         typeof(DynamicWrapperBase),
         new[] {interfaceType});
 
-      var wrapperMethod = new WrapperMethodBuilder(realObjectType, wrapperBuilder);
-
-      foreach (MethodInfo method in interfaceType.AllMethods())
+      foreach (var method in interfaceType.AllMethods())
       {
-        wrapperMethod.Generate(method);
+        WrapperMethodBuilder.GenerateMethod(method, realObjectType, typeBuilder);
       }
 
-      return wrapperBuilder.CreateType();
+      return typeBuilder.CreateType();
     }
 
     public static T CreateWrapper<T>(object realObject) where T : class
