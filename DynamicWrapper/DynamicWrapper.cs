@@ -2,12 +2,12 @@
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Runtime.InteropServices;
 using System.Threading;
 using Sigil.NonGeneric;
 
 namespace DynamicWrapper
 {
+
     public class DynamicWrapper
     {
         private static readonly ModuleBuilder ModuleBuilder;
