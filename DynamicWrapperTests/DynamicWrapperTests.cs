@@ -18,7 +18,7 @@ namespace DynamicWrapperTests
 
     public interface ITester
     {
-      string Repsond(string message);
+      string Respond(string message);
       int Return5();
       void VoidMethod();
       void Add6ToParam(ref int param);
@@ -30,7 +30,7 @@ namespace DynamicWrapperTests
 
     public interface ITester2
     {
-      string Repsond(string message);
+      string Respond(string message);
     }
 
     public interface IGenericTester
@@ -45,7 +45,7 @@ namespace DynamicWrapperTests
 
     public class MyTester
     {
-      public string Repsond(string message)
+      public string Respond(string message)
       {
         return message + " response";
       }
@@ -148,7 +148,7 @@ namespace DynamicWrapperTests
     {
       var wrappedObject = _realObject.As<ITester>();
 
-      Assert.That(wrappedObject.Repsond("Foo"), Is.EqualTo("Foo response"));
+      Assert.That(wrappedObject.Respond("Foo"), Is.EqualTo("Foo response"));
     }
 
     [Test]
@@ -157,8 +157,8 @@ namespace DynamicWrapperTests
       var wrappedObject1 = _realObject.As<ITester>();
       var wrappedObject2 = _realObject.As<ITester>();
 
-      Assert.That(wrappedObject1.Repsond("Foo"), Is.EqualTo("Foo response"));
-      Assert.That(wrappedObject2.Repsond("Foo"), Is.EqualTo("Foo response"));
+      Assert.That(wrappedObject1.Respond("Foo"), Is.EqualTo("Foo response"));
+      Assert.That(wrappedObject2.Respond("Foo"), Is.EqualTo("Foo response"));
     }
 
     [Test]
@@ -167,11 +167,11 @@ namespace DynamicWrapperTests
       var wrappedObject1 = _realObject.As<ITester>();
       var wrappedObject2 = _realObject.As<ITester2>();
 
-      Assert.That(wrappedObject1.Repsond("Foo"), Is.EqualTo(wrappedObject2.Repsond("Foo")));
+      Assert.That(wrappedObject1.Respond("Foo"), Is.EqualTo(wrappedObject2.Respond("Foo")));
     }
 
     [Test]
-    public void Parameterless_Methods_Wrap_Propperly()
+    public void Parameterless_Methods_Wrap_Properly()
     {
       var wrappedObject = _realObject.As<ITester>();
 
@@ -179,7 +179,7 @@ namespace DynamicWrapperTests
     }
 
     [Test]
-    public void Reference_Parameters_Wrap_Propperly()
+    public void Reference_Parameters_Wrap_Properly()
     {
       var wrappedObject = _realObject.As<ITester>();
 
@@ -190,7 +190,7 @@ namespace DynamicWrapperTests
     }
 
     [Test]
-    public void Out_Parameters_Wrap_Propperly()
+    public void Out_Parameters_Wrap_Properly()
     {
       var wrappedObject = _realObject.As<ITester>();
 
@@ -201,7 +201,7 @@ namespace DynamicWrapperTests
     }
 
     [Test]
-    public void Void_Methods_Wrap_Propperly()
+    public void Void_Methods_Wrap_Properly()
     {
       var wrappedObject = _realObject.As<ITester>();
 
@@ -220,7 +220,7 @@ namespace DynamicWrapperTests
     }
 
     [Test]
-    public void Set_Properties_Wrap_Propperly()
+    public void Set_Properties_Wrap_Properly()
     {
       var wrappedObject = _realObject.As<ITester>();
 
@@ -229,7 +229,7 @@ namespace DynamicWrapperTests
     }
 
     [Test]
-    public void Get_Properties_Wrap_Propperly()
+    public void Get_Properties_Wrap_Properly()
     {
       var wrappedObject = _realObject.As<ITester>();
 
@@ -303,7 +303,7 @@ namespace DynamicWrapperTests
     }
 
     [Test]
-    public void Events_Wrap_Propperly()
+    public void Events_Wrap_Properly()
     {
       var wrappedObject = _realObject.As<ITester>();
 
