@@ -46,9 +46,7 @@ namespace DynamicWrapper
       var allTypes = target.AllInterfaces().ToList();
       allTypes.Add(target);
 
-      return from type in allTypes
-        from method in type.GetMethods()
-        select method;
+      return allTypes.SelectMany(s => s.GetMethods());
     }
   }
 }
