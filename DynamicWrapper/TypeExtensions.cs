@@ -5,51 +5,51 @@ using System.Reflection;
 
 namespace DynamicWrapper
 {
-  public static class TypeExtensions
-  {
-    public static MethodInfo GetGenericMethod(this Type type, string name, Type[] parameterTypes)
+    public static class TypeExtensions
     {
-      var methods = type.GetMethods().Where(m => m.Name == name);
-
-      var found = methods.FirstOrDefault(m => m.HasParameters(parameterTypes));
-      return found;
-    }
-
-    public static bool HasParameters(this MethodInfo method, Type[] parameterTypes)
-    {
-      var methodParameters = method.GetParameters().Select(parameter => parameter.ParameterType).ToArray();
-
-      if (methodParameters.Length != parameterTypes.Length) return false;
-
-      for (int i = 0; i < methodParameters.Length; i++)
-      {
-        if (methodParameters[i].ToString() != parameterTypes[i].ToString())
+        public static MethodInfo GetGenericMethod(this Type type, string name, Type[] parameterTypes)
         {
-          return false;
+            var methods = type.GetMethods().Where(m => m.Name == name);
+
+            var found = methods.FirstOrDefault(m => m.HasParameters(parameterTypes));
+            return found;
         }
-      }
 
-      return true;
-    }
-
-    public static IEnumerable<Type> AllInterfaces(this Type target)
-    {
-      foreach (var parentInterface in target.GetInterfaces())
-      {
-        yield return parentInterface;
-        foreach (var childInterface in parentInterface.AllInterfaces())
+        public static bool HasParameters(this MethodInfo method, Type[] parameterTypes)
         {
-          yield return childInterface;
+            var methodParameters = method.GetParameters().Select(parameter => parameter.ParameterType).ToArray();
+
+            if (methodParameters.Length != parameterTypes.Length) return false;
+
+            for (int i = 0; i < methodParameters.Length; i++)
+            {
+                if (methodParameters[i].ToString() != parameterTypes[i].ToString())
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
-      }
-    }
 
-    public static IEnumerable<MethodInfo> AllMethods(this Type target)
-    {
-      var allTypes = target.AllInterfaces().ToList();
-      allTypes.Add(target);
+        public static IEnumerable<Type> AllInterfaces(this Type target)
+        {
+            foreach (var parentInterface in target.GetInterfaces())
+            {
+                yield return parentInterface;
+                foreach (var childInterface in parentInterface.AllInterfaces())
+                {
+                    yield return childInterface;
+                }
+            }
+        }
 
-      return allTypes.SelectMany(s => s.GetMethods());
+        public static IEnumerable<MethodInfo> AllMethods(this Type target)
+        {
+            var allTypes = target.AllInterfaces().ToList();
+            allTypes.Add(target);
+
+            return allTypes.SelectMany(s => s.GetMethods());
+        }
     }
-  }
 }
