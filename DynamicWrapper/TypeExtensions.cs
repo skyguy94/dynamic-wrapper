@@ -7,7 +7,7 @@ namespace DynamicWrapper
 {
   public static class TypeExtensions
   {
-    public static MethodInfo GetGenericMethod(this Type type, string name, params Type[] parameterTypes)
+    public static MethodInfo GetGenericMethod(this Type type, string name, Type[] parameterTypes)
     {
       var methods = type.GetMethods().Where(m => m.Name == name);
 
@@ -15,16 +15,19 @@ namespace DynamicWrapper
       return found;
     }
 
-    public static bool HasParameters(this MethodInfo method, params Type[] parameterTypes)
+    public static bool HasParameters(this MethodInfo method, Type[] parameterTypes)
     {
       var methodParameters = method.GetParameters().Select(parameter => parameter.ParameterType).ToArray();
 
-      if (methodParameters.Length != parameterTypes.Length)
-        return false;
+      if (methodParameters.Length != parameterTypes.Length) return false;
 
       for (int i = 0; i < methodParameters.Length; i++)
+      {
         if (methodParameters[i].ToString() != parameterTypes[i].ToString())
+        {
           return false;
+        }
+      }
 
       return true;
     }
