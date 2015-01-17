@@ -9,12 +9,13 @@ namespace DynamicWrapper
 {
   public class DynamicWrapper
   {
+    private static readonly ModuleBuilder ModuleBuilder;
+    private static readonly WrapperDictionary WrapperDictionary = new WrapperDictionary();
+
     public class DynamicWrapperBase
     {
       protected internal object RealObject;
     }
-
-    private static readonly ModuleBuilder ModuleBuilder;
 
     static DynamicWrapper()
     {
@@ -23,11 +24,19 @@ namespace DynamicWrapper
       ModuleBuilder = assembly.DefineDynamicModule("DynamicWrapperModule", false);
     }
 
-    private static readonly WrapperDictionary WrapperDictionary = new WrapperDictionary();
+    public static T CreateWrapper<T>(object realObject) where T : class
+    {
+      var dynamicType = GetWrapper(typeof(T), realObject.GetType());
+      var dynamicWrapper = (DynamicWrapperBase)Activator.CreateInstance(dynamicType);
+
+      dynamicWrapper.RealObject = realObject;
+
+      return dynamicWrapper as T;
+    }
 
     public static Type GetWrapper(Type interfaceType, Type realObjectType)
     {
-      Type wrapperType = WrapperDictionary.GetType(interfaceType, realObjectType);
+      var wrapperType = WrapperDictionary.GetType(interfaceType, realObjectType);
 
       if (wrapperType == null)
       {
@@ -91,16 +100,6 @@ namespace DynamicWrapper
       methodWrapper.Call(method);
       methodWrapper.Return();
       methodWrapper.CreateMethod();
-    }
-
-    public static T CreateWrapper<T>(object realObject) where T : class
-    {
-      var dynamicType = GetWrapper(typeof(T), realObject.GetType());
-      var dynamicWrapper = (DynamicWrapperBase) Activator.CreateInstance(dynamicType);
-
-      dynamicWrapper.RealObject = realObject;
-
-      return dynamicWrapper as T;
     }
   }
 }
