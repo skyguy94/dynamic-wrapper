@@ -16,18 +16,18 @@ myObject = wrapper.AsReal<MyObjectType>();
 Lets assume you have a class without an interface. This is often the case with .Net framework classes. Your code relies on this framework object, but you want to abstract it in order to substitute it under test. Typically, you would write a wrapper class that acts as a proxy for the real object, but implements an interface. This utility creates that wrapper for you on the fly.
 
 ```csharp
-    public class ClassWithoutInterface
-    { 
-        public void DoSomething()
-        {
-            // Do something
-        }
-    }
-
-    public interface IDoSomething
+public class ClassWithoutInterface
+{
+    public void DoSomething()
     {
-        void DoSomething();
+        // Do something
     }
+}
+
+public interface IDoSomething
+{
+    void DoSomething();
+}
 ```
 
 In C#, you cannot write the following because ClassWithoutInterface does not implement IDoSomething:
