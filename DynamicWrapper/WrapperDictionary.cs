@@ -14,23 +14,19 @@ namespace DynamicWrapper
 
     public Type GetType(Type interfaceType, Type realObjectType)
     {
-      string key = GenerateKey(interfaceType, realObjectType);
+      var key = GenerateKey(interfaceType, realObjectType);
 
-      if (_wrapperTypes.ContainsKey(key))
-        return _wrapperTypes[key];
+      Type value;
+      _wrapperTypes.TryGetValue(key, out value);
 
-      return null;
+      return value;
     }
 
     public void SetType(Type interfaceType, Type realObjectType, Type wrapperType)
     {
-      string key = GenerateKey(interfaceType, realObjectType);
+      var key = GenerateKey(interfaceType, realObjectType);
 
-      if (_wrapperTypes.ContainsKey(key))
-        _wrapperTypes[key] = wrapperType;
-      else
-        _wrapperTypes.Add(key, wrapperType);
+      _wrapperTypes[key] = wrapperType;
     }
-
   }
 }
