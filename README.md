@@ -2,6 +2,8 @@
 
 ## Stop writing wrapper classes, and do something more productive with your time.
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/skyguy94/dynamic-wrapper?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 This utility will automatically generate the wrapper class and return to you the wrapped object that implements your interface. 
 
 Simply copy DynamicWrapper.cs from the Downloads tab into your solution and use it. There are two extension methods available to you:
