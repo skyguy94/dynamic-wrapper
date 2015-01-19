@@ -17,3 +17,6 @@ deploy:
 - provider: NuGet
   api_key:
     secure: 0E2m/8I0e2mEtMP0a2BNxhcsii5r8j6OUh55zgC5VDZ/K1LhC1y42vKSt/jupESc
+- provider: GitHub
+  auth_token:
+    secure: 0E2m/8I0e2mEtMP0a2BNxhcsii5r8j6OUh55zgC5VDZ/K1LhC1y42vKSt/jupESc
